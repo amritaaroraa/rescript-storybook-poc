@@ -1,0 +1,22 @@
+rescript = 1
+g_finger := /Users/amritaarora/Desktop/storybook-poc-rescript/node_modules/@rescript/core/lib/ocaml/install.stamp
+g_finger := /Users/amritaarora/Desktop/storybook-poc-rescript/node_modules/@rescript/react/lib/ocaml/install.stamp
+g_finger := /Users/amritaarora/Desktop/storybook-poc-rescript/node_modules/rescript-material-ui/lib/ocaml/install.stamp
+rule astj
+  command = /Users/amritaarora/Desktop/storybook-poc-rescript/node_modules/rescript/darwinarm64/bsc.exe  -bs-v 10.1.4 -bs-jsx 4 -bs-jsx-mode automatic -open RescriptCore -absname -bs-ast -o $out $i
+o src/App.ast : astj ../../src/App.res
+rule deps
+  command = /Users/amritaarora/Desktop/storybook-poc-rescript/node_modules/rescript/darwinarm64/bsb_helper.exe -hash 2f5b24af137ca1f78f3a326baeef7d03 $in
+  restat = 1
+o src/App.d : deps src/App.ast
+rule mij
+  command = /Users/amritaarora/Desktop/storybook-poc-rescript/node_modules/rescript/darwinarm64/bsc.exe -I src/components -I src/stories/assets -I src/stories -I src -I /Users/amritaarora/Desktop/storybook-poc-rescript/node_modules/@rescript/core/lib/ocaml -I /Users/amritaarora/Desktop/storybook-poc-rescript/node_modules/@rescript/react/lib/ocaml -I /Users/amritaarora/Desktop/storybook-poc-rescript/node_modules/rescript-material-ui/lib/ocaml -open RescriptCore  -bs-package-name rescript-counter-app -bs-package-output es6:$in_d:.js -bs-v $g_finger $i
+  dyndep = 1
+  restat = 1
+o src/App.cmj src/App.cmi ../../src/App.js : mij src/App.ast
+o src/index.ast : astj ../../src/index.res
+o src/index.d : deps src/index.ast
+o src/index.cmj src/index.cmi ../../src/index.js : mij src/index.ast
+o src/components/Button.ast : astj ../../src/components/Button.res
+o src/components/Button.d : deps src/components/Button.ast
+o src/components/Button.cmj src/components/Button.cmi ../../src/components/Button.js : mij src/components/Button.ast

@@ -11,3 +11,16 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.primary-button {
+  color: white !important;
+  background-color: blue !important;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.secondary-button {
+  color: blue !important;
+  background-color: white !important;
+  cursor: pointer;
+  border-radius: 4px;
+}
